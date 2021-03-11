@@ -1,7 +1,40 @@
 <?php 
 
+/*
+Plugin Name: WC currency rate grabber
+Plugin URI: http://devpoliakov.com/
+Description: Get your currency rate from the preffer source
+Version: 0.1.1
+Author: Poliakov Yurii
+Author URI: 
+*/
 
-require_once 'includes/phpQuery-onefile.php';
+
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+/**
+* variables
+*/
+$cleanRows = unserialize(get_option('testusBlankkey'));
+
+
+// Hook for adding admin menus
+add_action('admin_menu', 'testusBlank_add_pages');
+
+// action function for above hook
+function testusBlank_add_pages() {
+$type_of_publication = 'all';
+ add_menu_page("Currency rate", 
+               'Your currency rate configuration' ,
+                'administrator',  
+                'currency_rate_options_page',  
+                'currency_rate_options_page');
+ 
+ //call register settings function
+  add_action( 'admin_init', 'WCorder_testusBlank_plugin_settings' );
+}
+
 
 
 // register hook
@@ -59,7 +92,7 @@ echo '</pre>';
 */
 
 }
-available_currencies();
+//available_currencies();
 /*
 $pq = phpQuery::newDocument($daily_exchange);
 
