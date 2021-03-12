@@ -20,19 +20,12 @@ $cleanRows = unserialize(get_option('testusBlankkey'));
 
 
 // Hook for adding admin menus
-add_action('admin_menu', 'testusBlank_add_pages');
+add_action('admin_menu', 'cr_grabber_add_pages');
 
 // action function for above hook
-function testusBlank_add_pages() {
-$type_of_publication = 'all';
- add_menu_page('Your currency rate configuration', 
-               'Currency rate' ,
-                'administrator',  
-                'currency_rate_options_page',  
-                'currency_rate_options_page');
- 
- //call register settings function
-  add_action( 'admin_init', 'WCorder_testusBlank_plugin_settings' );
+function cr_grabber_add_pages() {
+  add_submenu_page( 'woocommerce', 'Your currency rate configuration', 'Currency rate',
+                'administrator', 'currency_rate_options_page', 'currency_rate_options_page');
 }
 
 require_once 'inc/options_page.php';
